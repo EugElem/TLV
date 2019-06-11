@@ -15,16 +15,7 @@ import org.json.simple.JSONObject;
 public class Order {
     private ArrayList<TagDecoder> list_TD = new ArrayList<>();
 
-    private String   tag_1; // UNIX time
-    private String tag_2;   // max 8
-    private String tag_3;   // max 1000
-    private float  tag_4;   // TLV, м.б. больше 1 вложенного TLV
-
-    private String tag_11;  // max 200
-    private int tag_12;     // max 6 (в копейках)
-    private long tag_13;    // max 8
-    private int tag_14;     // max 6 (в копейках)
-
+    // уменьшаемая строка для парсинга
     private String strClean;
 
     private int tagInt=0;
@@ -38,14 +29,14 @@ public class Order {
     }
     JSONObject obj=new JSONObject();
     JSONObject obj_2;
+    JSONArray ar=new JSONArray();
+    JSONObject objArr;
 
 
     public void printTag(){
 
 
         int j=0;
-        int jj=0;
-        // Создание элементов списка и создание в каждом экземпляра объектаfor (int i = 0; i < a.length; i++) {
 
         //цикл - пока не кончится сторока разбора
         while (this.strClean.length()>0) {
@@ -90,20 +81,15 @@ public class Order {
             String n = list_TD.get(numObj).getTagNum();
             String l = list_TD.get(numObj).getTagLength();
             String v = list_TD.get(numObj).getTagValue();
-            System.out.println(" содержимое тега (из объекта №"+numObj + "  тег№:"+n+ "  длина тега:"+l+"  значение:"+v);
+            //System.out.println(" содержимое тега (из объекта №"+numObj + "  тег№:"+n+ "  длина тега:"+l+"  значение:"+v);
 
         }
-        System.out.println("JSON:");
-        System.out.println("dateTime: "+obj.get("dateTime"));
-        System.out.println("orderNumber: "+obj.get("orderNumber"));
-        System.out.println("customerName: "+obj.get("customerName"));
-        System.out.println("items: "+obj.get("items"));
-        System.out.println("name: "+obj_2.get("name"));
-        System.out.println("price: "+obj_2.get("price"));
-        System.out.println("quantity: "+obj_2.get("quantity"));
-        System.out.println("sum: "+obj_2.get("sum"));
 
+        obj.put("items",ar);
 
+        System.out.println("\n"+obj);
+        Saver s = new Saver();
+        s.fSaver(obj,"e://test//10.txt");
     }
 
 
@@ -123,9 +109,7 @@ public class Order {
         // убрать из строки обработанные данные
         strBuffer.delete(0, i);
         strForCut = strBuffer.toString();
-//        System.out.println("tag: "+tag + " ");
 
-//        System.out.println("проверка строки  из tagCut: "+strForCut);
         return strForCut;
     }
 
@@ -194,19 +178,12 @@ public class Order {
                 if (!tag.equals("000B") ){
                     tagVal = "Вложенных TLV нет";
                     list_TD.get(s).setTagValue(tagVal);
-                    //                   System.out.println(tagVal);
                 }
 
                 else {
-                    //System.out.println("Вложенные TLV !!! объект № " + s + "   строка для анализа в объекте: "+ this.strClean);
                     tagVal = "Вложенные структуры";
                     list_TD.get(s).setTagValue(tagVal);
 
-                    // создание массива объектов, в котором  будут объекты item
-                    JSONArray ar=new JSONArray();
-                    JSONObject objArr;
-
-                    //obj.put("items",tagVal_1); // поместить после цикла и  добавить в него массив ar в который добавить список
                 }
                 break;
 
@@ -256,17 +233,15 @@ public class Order {
                 // добавление пары ключ:значение
                 obj_2.put("sum",new  Integer(tagVal_1));
 
+                // запись в массив объектов
+                objArr=new JSONObject();
+                ar.add(obj_2);
                 break;
             }
 
             default:
                 System.out.println("default");
-
         }
         return tagVal;
     }
 }
-
-
-// а862тк159
-// а862тк159

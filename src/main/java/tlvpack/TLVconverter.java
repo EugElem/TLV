@@ -18,9 +18,7 @@ import java.util.ArrayList;
  */
 public class TLVconverter {
 
-    private static String inputStr="";  // строка для записи в файл
     private static String inputFile="e://test//1.txt"; // файла для записи
-    private static  String outputStr="";
     private  static  String outputFile="";
     private static String valueTag;
     private static String strDate;
@@ -28,11 +26,15 @@ public class TLVconverter {
     //static ArrayList<TagDecoder> list_TD = new ArrayList<>();
 
 
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, UnsupportedEncodingException, ParseException {
 
+
+        inputFile = args[0];
+        outputFile = args[1];
 
         // удаление всего лишнего
         strClean =Pars.parser(inputFile);

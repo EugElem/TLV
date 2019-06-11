@@ -1,5 +1,7 @@
 package tlvpack;
 
+import org.json.simple.JSONObject;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,19 +10,19 @@ import java.io.IOException;
  * @author eelem
  */
 public class Saver {
-    private String firstInFile="";
-    private String inputFile ="e://test//8.txt";
+    private JSONObject firstInFile;
+    private String inputFile;
 
 
-    public String fSaver(String inputStr, String inputFile){
+    public String fSaver(JSONObject inputStr, String _inputFile){
         this.firstInFile = inputStr;
-        this.inputFile = inputFile;
-        System.out.println(this.firstInFile);
+        this.inputFile = _inputFile;
+        //System.out.println(this.firstInFile);
 
         try(FileWriter writer = new FileWriter(inputFile, false))
         {
             // запись всей строки
-            writer.write(firstInFile);
+            writer.write(String.valueOf(firstInFile));
             writer.flush();
         }
 
