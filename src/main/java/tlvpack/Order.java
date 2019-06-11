@@ -95,6 +95,15 @@ public class Order {
         }
         System.out.println("JSON:");
         System.out.println("dateTime: "+obj.get("dateTime"));
+        System.out.println("orderNumber: "+obj.get("orderNumber"));
+        System.out.println("customerName: "+obj.get("customerName"));
+        System.out.println("items: "+obj.get("items"));
+        System.out.println("name: "+obj_2.get("name"));
+        System.out.println("price: "+obj_2.get("price"));
+        System.out.println("quantity: "+obj_2.get("quantity"));
+        System.out.println("sum: "+obj_2.get("sum"));
+
+
     }
 
 
