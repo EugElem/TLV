@@ -33,7 +33,7 @@ public class Order {
     JSONObject objArr;
 
 
-    public void printTag(){
+    public JSONObject printTag(){
 
 
         int j=0;
@@ -88,8 +88,7 @@ public class Order {
         obj.put("items",ar);
 
         System.out.println("\n"+obj);
-        Saver s = new Saver();
-        s.fSaver(obj,"e://test//10.txt");
+        return obj;
     }
 
 

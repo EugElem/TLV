@@ -1,5 +1,7 @@
 package tlvpack;
 
+import org.json.simple.JSONObject;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class TLVconverter {
 
     private static String inputFile="e://test//1.txt"; // файла для записи
-    private  static  String outputFile="";
+    private static String outputFile="";
     private static String valueTag;
     private static String strDate;
     private static String strClean;
@@ -33,65 +35,22 @@ public class TLVconverter {
     public static void main(String[] args) throws IOException, UnsupportedEncodingException, ParseException {
 
 
-        inputFile = args[0];
-        outputFile = args[1];
+        //inputFile = args[0];
+        //outputFile = args[1];
 
         // удаление всего лишнего
-        strClean =Pars.parser(inputFile);
+        strClean = Pars.parser(inputFile);
         //System.out.println("получено из парсера " + strClean+"\n");
 
         // разбор на отдельные теги
         Order order = new Order();
         order.setStrClean(strClean);
-        order.printTag();
-
-
-        //вызов класса парсинга
-        valueTag = Pars.decoderCP(strClean);
-//        System.out.println("получено из декодераCP :" + valueTag+"\n");
-
-
-//        TabCP866.Cl3();
-
-
-        /* Строка из файла TLV, разбирается на теги
-         ** Каждый тег раздирается на: Имя тега, длину и значение
-         ** Далее каждый набор помешается в список для хранения тегов
-         */
-
-        // Создание списка для хранения объектов
-//        static ArrayList<TagDecoder> list_TD = new ArrayList<>();
-/*
-        // Создание элементов списка и создание в каждом экземпляра объекта
-        for (int i = 0; i < a.length; i++) {
-
-            list_TD.add(new TagDecoder(a[i]));
-        }
-
-        // цикл проверки заполнения
-        for (int i = 0; i < a.length; i++) {
-
-            System.out.println("получение из списка " + list_TD.get(i).printStrIn());
-        }
-*/
-
-
+        JSONObject obj = order.printTag();
 
         /*
-         ** Запись в JSON
+         ** Запись JSON в файл
          */
-
-
-
-
-
-        /*
-         ** Вызов функции записи в файл
-         **
-         */
-        //Saver s = new Saver();
-        // ввести строку для записи в файл и название файла для записи
-        //s.fSaver(outputStr, outputFile);
+        Saver s = new Saver();
+        s.fSaver(obj, outputFile);
     }
-
 }
