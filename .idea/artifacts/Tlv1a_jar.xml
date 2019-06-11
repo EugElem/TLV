@@ -2,6 +2,9 @@
   <artifact type="jar" name="Tlv1a:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Tlv1a_jar</output-path>
     <root id="archive" name="Tlv1a.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="Tlv1a" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" path-in-jar="/" />
