@@ -35,8 +35,8 @@ public class TLVconverter {
     public static void main(String[] args) throws IOException, UnsupportedEncodingException, ParseException {
 
 
-        //inputFile = args[0];
-        //outputFile = args[1];
+        inputFile = args[0];
+        outputFile = args[1];
 
         // удаление всего лишнего
         strClean = Pars.parser(inputFile);
