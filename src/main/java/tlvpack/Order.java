@@ -2,8 +2,6 @@ package tlvpack;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,7 +11,6 @@ import org.json.simple.JSONObject;
  * @author eelem
  */
 public class Order {
-    private ArrayList<TagDecoder> list_TD = new ArrayList<>();
 
     // уменьшаемая строка для парсинга
     private String strClean;
@@ -40,7 +37,6 @@ public class Order {
 
         //цикл - пока не кончится сторока разбора
         while (this.strClean.length()>0) {
-//            System.out.println("\nj="+j);
 
             // получение номера тега
             l_tag =4;
@@ -48,41 +44,23 @@ public class Order {
 
             int tag_number = Integer.parseInt(tag,16);
 
-            // создание объекта с дальнейшим занесением значений. (здесь - номер тега)
-            list_TD.add(j, new TagDecoder());
-            list_TD.get(j).setTagNum(tag_number);
-//            System.out.println(list_TD.get(j).getTagNum());
-
-
-
             // получение длины тега
-            // обращение к функции экземпляра класса из списка таких экземпляров
             tagLength(j);
-            list_TD.get(j).setTagLenght(String.valueOf(l_tag));
-//            System.out.println("длина: "+l_tag);
+            //System.out.println("длина: "+l_tag);
 
 
 
             // получение значения
             try {
                 String a = tagDev(tag_number, j);
-                list_TD.get(j).setTagValue(a);
 
             } catch (ParseException e) {
                 e.printStackTrace();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
             j++;
-
-
-            // Ниже проверочный код, потом можно закомментировать или удалить
-            int numObj = (list_TD.size()-1);
-            String n = list_TD.get(numObj).getTagNum();
-            String l = list_TD.get(numObj).getTagLength();
-            String v = list_TD.get(numObj).getTagValue();
-            //System.out.println(" содержимое тега (из объекта №"+numObj + "  тег№:"+n+ "  длина тега:"+l+"  значение:"+v);
-
         }
 
         obj.put("items",ar);
@@ -121,7 +99,7 @@ public class Order {
         int tagInt = Integer.parseInt(tag,16);
         tag = String.valueOf(tagInt);
         l_tag = Integer.parseInt(tag) * 2;
-//        System.out.println("длина: "+l_tag);
+        //System.out.println("длина: "+l_tag);
         return  l_tag;
     }
 
@@ -168,7 +146,6 @@ public class Order {
 
             }
             case 4:{
-                int s = (list_TD.size()-1);
                 // получение строки с именем заказчика в 16-ричном формате
                 l_tag=4;
                 tagCut(this.strClean);
@@ -176,12 +153,10 @@ public class Order {
                 // проверка на наличие тега 11
                 if (!tag.equals("000B") ){
                     tagVal = "Вложенных TLV нет";
-                    list_TD.get(s).setTagValue(tagVal);
                 }
 
                 else {
                     tagVal = "Вложенные структуры";
-                    list_TD.get(s).setTagValue(tagVal);
 
                 }
                 break;

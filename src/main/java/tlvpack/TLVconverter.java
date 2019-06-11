@@ -7,25 +7,15 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 
-import java.io.*;
-import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
-import java.util.ArrayList;
-
-
-
 /**
  *
  * @author eelem
  */
 public class TLVconverter {
 
-    private static String inputFile="e://test//1.txt"; // файла для записи
-    private static String outputFile="";
-    private static String valueTag;
-    private static String strDate;
+    private static String inputFile="e://test//1"; // файла для записи
+    private static String outputFile="e://test//1.json";
     private static String strClean;
-    //static ArrayList<TagDecoder> list_TD = new ArrayList<>();
 
 
 
@@ -34,9 +24,12 @@ public class TLVconverter {
      */
     public static void main(String[] args) throws IOException, UnsupportedEncodingException, ParseException {
 
+        //
+        if (args.length !=0) {
+            inputFile = args[0];
+            outputFile = args[1];
+        }
 
-        inputFile = args[0];
-        outputFile = args[1];
 
         // удаление всего лишнего
         strClean = Pars.parser(inputFile);
