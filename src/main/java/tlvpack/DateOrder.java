@@ -29,14 +29,6 @@ public class DateOrder {
 
         Date date = new Date(orderDate);   // date Sun Jan 10 10:30:00 YEKT 2016
         strDate = date.toString();
-//    System.out.println("дата заказа: "+date);
-
-        //long millis = date.getTime();           // int 1452403800000
-        //System.out.println("дата заказа в мс: "+millis);
-
-        //String milStr = Long.toHexString(millis); // 1522a0337c0
-        //System.out.println("из лонг: "+milStr); //1522a0337c0
-
 
         return strDate;
     }
