@@ -22,13 +22,21 @@ public class OrderTest {
 
     @Test
     public void tagCut() {
+        String source ="01000400";
+        Order o = new Order();
+        assertEquals("","0400",o.tagCut(source));
     }
 
     @Test
     public void tagLength() {
+        Order o = new Order();
+        assertEquals("",2,o.tagLength(1));
     }
 
     @Test
     public void getNunber() {
+        Order o = new Order();
+        assertEquals("","1",o.getNunber());
+
     }
 }

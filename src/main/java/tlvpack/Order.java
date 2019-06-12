@@ -100,6 +100,7 @@ public class Order {
     // функция получения длины в 10-ном виде
     protected int tagLength (int j){
 
+        this.strClean=(this.strClean==null)?"0100":this.strClean;
         this.strClean = tagCut(this.strClean);
         int tagInt = Integer.parseInt(tag,16);
         tag = String.valueOf(tagInt);
@@ -109,6 +110,8 @@ public class Order {
     }
 
     protected String getNunber(){
+        this.strClean=(this.strClean==null)?"0100":this.strClean;
+
         // получение строки с номером заказа в 16-ричном формате
         this.strClean = tagCut(this.strClean);
         int tagInt = Integer.parseInt(tag,16);
