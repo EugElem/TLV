@@ -44,6 +44,7 @@ public class Order {
 
             int tag_number = Integer.parseInt(tag,16);
 
+
             // получение длины тега
             tagLength(j);
             //System.out.println("длина: "+l_tag);
