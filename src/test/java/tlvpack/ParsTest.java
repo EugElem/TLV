@@ -20,7 +20,7 @@ public class ParsTest {
 
         try (InputStream fileIn = new FileInputStream("e://test//1")) {
             // байтовая переменная для хранения массива байтов
-
+            /*
             byte[] buffer = new byte[fileIn.available()];
 
             // считаем файл в буфер
@@ -32,6 +32,9 @@ public class ParsTest {
                 strTlv = new String(buffer);
             }
 
+            */
+            String strTlv = "01 00 04 00 A8 32 92 56 02 00 03 00 04 71 02 03\n";
+
             String pat_1 = "\\W";
             String pat_2 = "";
             strTlv1 = strTlv.replaceAll(pat_1, pat_2);
@@ -39,8 +42,7 @@ public class ParsTest {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        String expected="01000400A83292560200030004710203000B008E8E8E2090AEACA0E8AAA004003A000B00070084EBE0AEAAAEAB0C000200204E0D00020000020E000200409C0B00070084EBE0AEAAAEAB0C000200204E0D00020000020E000200409C";
-
+        String expected="01000400A83292560200030004710203";
         String actual = strTlv1;
         //System.out.println("expected = " + expected);
         //System.out.println("actual   = " + actual);
