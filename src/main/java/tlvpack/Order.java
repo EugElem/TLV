@@ -34,7 +34,11 @@ public class Order {
 
 
         int j=0;
-
+        this.strClean =(this.strClean==null)?
+                "01000400A83292560200030004710203000B008E8E8E2" +
+                "090AEACA0E8AAA004003A000B00070084EBE0AEAAAEAB0C000200204E0D00020000020E000" +
+                "200409C0B00070084EBE0AEAAAEAB0C000200204E0D00020000020E000200409C" :
+                this.strClean;
         //цикл - пока не кончится сторока разбора
         while (this.strClean.length()>0) {
 
@@ -66,7 +70,7 @@ public class Order {
 
         obj.put("items",ar);
 
-        System.out.println("\n"+obj);
+        //System.out.println("\n"+obj);
         return obj;
     }
 
